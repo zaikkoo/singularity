@@ -37,7 +37,6 @@ CONFIG_FOLDERS=(
 # Pacotes dos repositórios oficiais (pacman)
 PACMAN_PACKAGES=(
     hyprland
-    waybar
     kitty
     rofi-wayland
     swaync
@@ -47,6 +46,7 @@ PACMAN_PACKAGES=(
     qt6ct
     papirus-icon-theme
     wl-clipboard
+    modemmanager   # dependência de build do waybar-cava-git (mm-glib)
 )
 
 # Pacotes do AUR (via yay)
@@ -55,7 +55,7 @@ AUR_PACKAGES=(
     ttf-jetbrains-mono-nerd
     ttf-rubik-vf           # Rubik (variable font)
     libcava                # necessário pro módulo cava do waybar
-    waybar-cava-git        # módulo de visualização de áudio na waybar
+    waybar-cava-git        # substitui o pacote "waybar" padrão (não instale os dois)
 )
 
 # --------- FUNÇÕES ---------
