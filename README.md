@@ -1,4 +1,4 @@
-# &nbsp;<img width="30" height="30" alt="Image" src="https://github.com/zaikkoo/zaikkoo/blob/main/assets/void-knight.png" /> dotfileszk
+# &nbsp;<img width="35" height="35" alt="Image" src="https://github.com/zaikkoo/zaikkoo/blob/main/assets/void-knight.png" /> dotfileszk
 
 ![](screenshots/desktop.png)
 
