@@ -1,4 +1,4 @@
-# dotfileszk &nbsp;<img width="35" height="35" alt="Image" src="https://github.com/zaikkoo/zaikkoo/blob/main/assets/void-knight.png" />
+# Singularity Dotfiles &nbsp;<img width="35" height="35" alt="Image" src="https://github.com/zaikkoo/zaikkoo/blob/main/assets/void-knight.png" />
 
 ![](screenshots/desktop.png)
 
