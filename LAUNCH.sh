@@ -47,6 +47,7 @@ PACMAN_PACKAGES=(
     papirus-icon-theme
     wl-clipboard
     modemmanager   # dependência de build do waybar-cava-git (mm-glib)
+    ncspot         # spotify via terminal
 )
 
 # Pacotes do AUR (via yay)
