@@ -48,6 +48,8 @@ PACMAN_PACKAGES=(
     wl-clipboard
     modemmanager   # dependência de build do waybar-cava-git (mm-glib)
     ncspot         # spotify via terminal
+    cmatrix
+    cava
 )
 
 # Pacotes do AUR (via yay)
