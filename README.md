@@ -37,7 +37,7 @@ into `~/.config` (backing up anything already there). Log out and back in
 
 ## Keybinds
 
-Programs used: **Kitty** (Terminal), **Nautilus** (file manager), **Rofi** (launcher).
+Programs used: **Kitty** (Terminal), **Nautilus** (File Manager), **Rofi** (Launcher).
 
 ### 🚀 Launch Applications
 
