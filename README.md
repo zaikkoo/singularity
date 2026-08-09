@@ -108,7 +108,7 @@ Move focus with `SUPER + arrow keys`:
 ## Details
 
 - OS: **[Arch Linux](https://archlinux.org)**
-- WM: **[Hyprland](https://github.com/hyprwm/Hyprland)** (config in Lua, via [hyprlua](https://github.com/hyprland-community/hyprlua))
+- WM: **[Hyprland](https://github.com/hyprwm/Hyprland)** (config in Lua)
 - Bar: **[Waybar](https://github.com/Alexays/Waybar)** ([waybar-cava-git](https://aur.archlinux.org/packages/waybar-cava-git) build, with Cava audio visualizer)
 - Terminal: **[Kitty](https://github.com/kovidgoyal/kitty)**
 - Launcher: **[Rofi](https://github.com/davatorium/rofi)**
