@@ -21,8 +21,8 @@ sudo pacman -S git
 2. Clone the repository:
 ```bash
 cd $HOME
-git clone https://github.com/zaikkoo/dotfileszk
-cd dotfileszk
+git clone https://github.com/zaikkoo/singularity
+cd singularity
 ```
 
 3. Run the installer:
