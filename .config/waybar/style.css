@@ -1,0 +1,89 @@
+@import "colors/absolute-void.css";
+
+* {
+    all: unset;
+    font-family: "Iosevka Nerd Font", monospace;
+}
+
+window#waybar {
+    background-color: @bg0;
+    color: @light-orange;
+    border-radius: 10px 10px;
+}
+
+#workspaces {
+    min-width: 100px;
+    font-size: 0.4rem;
+    padding: 2px 4px;
+    margin: 11px 0;
+    border-radius: 99px;
+}
+
+#workspaces button {
+    background-color: @bg4;
+    color: transparent;
+    padding: 0px 5px;
+    border-radius: 99px;
+    margin: 0 2px;
+    min-width: 4px;
+}
+
+#workspaces button.active {
+    background-color: @dark-orange;
+    min-width: 1.2rem;
+    font-weight: 800;
+    transition: none;
+}
+
+#clock,
+#clock#right {
+    margin: 0 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: @orange;
+}
+
+.modules-left {
+    margin-left: 15px;
+}
+
+.modules-right {
+    margin-right: 15px;
+}
+
+#cava {
+    margin: 0 12px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+#network {
+    padding: 0 8px;
+    font-size: 16px; 
+    margin-right: 16px;
+}
+
+menu {
+	background: @bg0;
+    color: @light-orange;
+    border:1px solid;
+    border-radius: 16px;
+    border-color: @orange;
+    padding: 8px;
+}
+
+menuitem {
+	border-radius: 10px;
+    padding: 10px 18px;
+    margin: 3px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: all 150ms;
+}
+
+menuitem:hover {
+    background: @light-orange;
+    color: @dark-orange;
+}
