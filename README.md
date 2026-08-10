@@ -105,6 +105,10 @@ Move focus with `SUPER + arrow keys`:
 | Move window   | `SUPER + Left Click` drag    |
 | Resize window | `SUPER + Right Click` drag   |
 
+## Notes
+
+- Apply the wallpaper with "awww img ~/singularity/wallpaper/void.png"
+
 ## Details
 
 - OS: **[Arch Linux](https://archlinux.org)**
@@ -115,6 +119,7 @@ Move focus with `SUPER + arrow keys`:
 - Notifications: **[SwayNC](https://github.com/ErikReider/SwayNotificationCenter)**
 - Shell: **[Fish](https://fishshell.com)**
 - Wallpaper: **[awww](https://codeberg.org/wobbl/awww)** (successor to swww)
+- Editor: **[Neovim](https://github.com/neovim/neovim)**
 - System info: **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)**
 - Icons: **Papirus-Dark**
 - Cursor: **[apple_cursor](https://aur.archlinux.org/packages/apple_cursor)** (macOS-style)
