@@ -41,33 +41,16 @@ CONFIG_FILES=(
 
 # Pacotes dos repositórios oficiais (pacman)
 PACMAN_PACKAGES=(
-    hyprland
-    kitty
-    rofi-wayland
-    swaync
-    fastfetch
-    fish
-    starship
-    nautilus
-    neovim
-    awww          # daemon de wallpaper (sucessor do swww), fornece o comando awww-daemon
-    qt6ct
-    papirus-icon-theme
-    wl-clipboard
-    modemmanager   # dependência de build do waybar-cava-git (mm-glib)
-    gpsd           # dependência de build do waybar-cava-git (libgps)
-    ncspot         # spotify via terminal
-    cmatrix
+    hyprland kitty rofi-wayland swaync fastfetch fish starship nautilus
+    nwg-look neovim awww qt6ct papirus-icon-theme wl-clipboard modemmanager
+    gpsd pipewire pipewire-pulse pipewire-alsa wireplumber ncspot cmatrix
     cava
 )
 
 # Pacotes do AUR (via yay)
 AUR_PACKAGES=(
-    apple_cursor          # tema de cursor "macOS"
-    ttf-jetbrains-mono-nerd
-    ttf-rubik-vf           # Rubik (variable font)
-    libcava                # necessário pro módulo cava do waybar
-    waybar-cava-git        # substitui o pacote "waybar" padrão (não instale os dois)
+    apple_cursor papirus-folders ttf-jetbrains-mono-nerd ttf-rubik-vf           
+    libcava waybar-cava-git
 )
 
 # --------- FUNÇÕES ---------
@@ -110,6 +93,9 @@ install_packages() {
 
     log "Instalando pacotes do AUR..."
     yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
+
+    log "Habilitando serviços de áudio (pipewire)..."
+    systemctl --user enable --now pipewire pipewire-pulse wireplumber || warn "Não consegui habilitar os serviços de áudio automaticamente. Rode manualmente: systemctl --user enable --now pipewire pipewire-pulse wireplumber"
 }
 
 link_item() {
