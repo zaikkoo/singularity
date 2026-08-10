@@ -42,15 +42,15 @@ CONFIG_FILES=(
 # Pacotes dos repositórios oficiais (pacman)
 PACMAN_PACKAGES=(
     hyprland kitty rofi-wayland swaync fastfetch fish starship nautilus
-    nwg-look neovim awww qt6ct papirus-icon-theme wl-clipboard modemmanager
-    gpsd pipewire pipewire-pulse pipewire-alsa wireplumber ncspot cmatrix
-    cava
+    nwg-look neovim awww qt6ct papirus-icon-theme wl-clipboard
+    modemmanager gpsd pipewire pipewire-pulse pipewire-alsa
+    wireplumber dconf ncspot cmatrix cava
 )
 
 # Pacotes do AUR (via yay)
 AUR_PACKAGES=(
     apple_cursor papirus-folders ttf-jetbrains-mono-nerd ttf-rubik-vf           
-    libcava waybar-cava-git
+    libcava waybar-cava-git     
 )
 
 # --------- FUNÇÕES ---------
@@ -94,6 +94,9 @@ install_packages() {
     log "Instalando pacotes do AUR..."
     yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 
+    log "Aplicando cor das pastas do Papirus (branco)..."
+    papirus-folders -C white --theme Papirus-Dark || warn "Não consegui aplicar a cor das pastas automaticamente. Rode manualmente: papirus-folders -C white --theme Papirus-Dark"
+
     log "Habilitando serviços de áudio (pipewire)..."
     systemctl --user enable --now pipewire pipewire-pulse wireplumber || warn "Não consegui habilitar os serviços de áudio automaticamente. Rode manualmente: systemctl --user enable --now pipewire pipewire-pulse wireplumber"
 }
@@ -135,6 +138,16 @@ link_configs() {
     done
 }
 
+apply_gtk_theme() {
+    log "Aplicando tema GTK via gsettings (necessário pra apps GTK4/libadwaita, como o Nautilus)..."
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+    gsettings set org.gnome.desktop.interface font-name 'Rubik 11.6'
+    gsettings set org.gnome.desktop.interface cursor-theme 'macOS'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' \
+        || warn "Não consegui aplicar o tema via gsettings automaticamente."
+}
+
 apply_cursor() {
     if command -v hyprctl &>/dev/null && pgrep -x Hyprland &>/dev/null; then
         log "Aplicando tema de cursor..."
@@ -169,6 +182,7 @@ main() {
     install_packages
     link_configs
     apply_cursor
+    apply_gtk_theme
     set_default_shell
     log "Concluído! O sistema vai reiniciar pra aplicar tudo (shell, rice, etc)."
 
