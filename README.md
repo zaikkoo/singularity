@@ -35,6 +35,12 @@ This installs the pacman + AUR dependencies and symlinks every config folder
 into `~/.config` (backing up anything already there). Log out and back in
 (or reboot) afterwards to start Hyprland with the rice applied.
 
+---
+
+For additional details or troubleshooting, visit the [issues page](https://github.com/zaikkoo/singularity/issues).
+
+---
+
 ## Keybinds
 
 Programs used: **Kitty** (Terminal), **Nautilus** (File Manager), **Rofi** (Launcher).
