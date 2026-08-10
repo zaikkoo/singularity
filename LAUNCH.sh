@@ -144,7 +144,10 @@ apply_gtk_theme() {
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
     gsettings set org.gnome.desktop.interface font-name 'Rubik 11.6'
     gsettings set org.gnome.desktop.interface cursor-theme 'macOS'
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' \
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface font-hinting 'slight'
+    gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+    gsettings set org.gnome.desktop.interface font-rgba-order 'rgb' \
         || warn "Não consegui aplicar o tema via gsettings automaticamente."
 }
 
