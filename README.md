@@ -3,7 +3,8 @@
 ![](screenshots/desktop.png)
 
 My personal Arch Linux rice: **Hyprland** + **Kitty** + **Waybar** (with Cava audio
-visualizer), tied together with a Lua-based Hyprland config.
+visualizer), tied together with a Lua-based Hyprland config. The overall
+aesthetic draws heavy inspiration from *Hollow Knight*.
 
 ## Installation
 
@@ -117,6 +118,21 @@ Move focus with `SUPER + arrow keys`:
   
 - This config was set up for an ABNT2 Thinkpad keyboard. Edit "~/.config/hypr/modules/input.lua" and adjust "kb_layout/kb_variant/kb_model" values to match your own layout.
 
+## Wallpapers
+
+<table>
+  <tr>
+    <td><img src="wallpapers/void.png" width="350"></td>
+    <td><img src="wallpapers/void-1.png" width="350"></td>
+    <td><img src="wallpapers/void-2.png" width="350"></td>
+  </tr>
+  <tr>
+    <td><img src="wallpapers/void-3.png" width="350"></td>
+    <td><img src="wallpapers/void-4.png" width="350"></td>
+    <td><img src="wallpapers/void-5.png" width="350"></td>
+  </tr>
+</table>
+
 ## Details
 
 - OS: **[Arch Linux](https://archlinux.org)**
@@ -134,7 +150,6 @@ Move focus with `SUPER + arrow keys`:
 
 ## Screenshots
 
-![](screenshots/desktop.png)
 ![](screenshots/terminals.png)
 ![](screenshots/rofi.png)
 ![](screenshots/swaync.png)
