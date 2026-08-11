@@ -51,7 +51,7 @@ PACMAN_PACKAGES=(
 # Pacotes do AUR (via yay)
 AUR_PACKAGES=(
     apple_cursor papirus-folders ttf-jetbrains-mono-nerd ttf-rubik-vf           
-    libcava waybar-cava-git     
+    libcava waybar-cava-git ttf-iosevka-nerd
 )
 
 # --------- FUNÇÕES ---------
