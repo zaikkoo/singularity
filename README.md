@@ -113,7 +113,8 @@ Move focus with `SUPER + arrow keys`:
 
 ## Notes
 
-- Apply the wallpaper with "awww img ~/singularity/wallpaper/void.png"
+- Wallpapers are located in "~/singularity/wallpapers/". Apply one with "awww img ~/singularity/wallpapers/FILENAME.png" (e.g. void.png, void-1.png, void-2.png, ...).
+  
 - This config was set up for an ABNT2 Thinkpad keyboard. Edit "~/.config/hypr/modules/input.lua" and adjust "kb_layout/kb_variant/kb_model" values to match your own layout.
 
 ## Details
