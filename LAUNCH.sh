@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 #
-# LAUNCH.sh — instalador do rice Hyprland (zaikkoo/singularity)
+# LAUNCH.sh — Hyprland rice installer (zaikkoo/singularity)
 #
-# O que este script faz:
-#   1. Verifica se está rodando em Arch Linux e se o yay está instalado
-#   2. Instala os pacotes necessários (repositórios oficiais + AUR)
-#   3. Faz backup de qualquer config existente em ~/.config
-#   4. Cria symlinks dos configs do repositório para ~/.config
-#   5. Aplica o tema de cursor via hyprctl (se o Hyprland já estiver rodando)
+# What this script does:
+#   1. Checks that it's running on Arch Linux and that yay is installed
+#   2. Installs the required packages (official repos + AUR)
+#   3. Backs up any existing config in ~/.config
+#   4. Creates symlinks from the repo configs to ~/.config
+#   5. Applies the cursor theme via hyprctl (if Hyprland is already running)
 #
-# Uso:
+# Usage:
 #   ./LAUNCH.sh
 
 set -euo pipefail
 
-# --------- CONFIGURAÇÃO ---------
+# --------- CONFIGURATION ---------
 
-# Diretório onde este script está (assume que é a raiz do repo clonado)
+# Directory this script lives in (assumes it's the root of the cloned repo)
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_SRC="$DOTFILES_DIR/.config"
 CONFIG_DEST="$HOME/.config"
 
-# Pastas do .config que serão linkadas (edite se adicionar/remover algo no repo)
+# .config folders that will be symlinked (edit if you add/remove something in the repo)
 CONFIG_FOLDERS=(
     hypr
     waybar
@@ -35,12 +35,12 @@ CONFIG_FOLDERS=(
     nvim
 )
 
-# Arquivos soltos do .config (não pastas) que serão linkados
+# Standalone .config files (not folders) that will be symlinked
 CONFIG_FILES=(
     starship.toml
 )
 
-# Pacotes dos repositórios oficiais (pacman)
+# Official repo packages (pacman)
 PACMAN_PACKAGES=(
     hyprland kitty rofi-wayland swaync fastfetch fish starship nautilus
     nwg-look neovim awww qt6ct papirus-icon-theme wl-clipboard
@@ -48,58 +48,58 @@ PACMAN_PACKAGES=(
     wireplumber dconf ncspot cmatrix cava
 )
 
-# Pacotes do AUR (via yay)
+# AUR packages (via yay)
 AUR_PACKAGES=(
     apple_cursor papirus-folders ttf-jetbrains-mono-nerd ttf-rubik-vf           
     libcava waybar-cava-git ttf-iosevka-nerd
 )
 
-# --------- FUNÇÕES ---------
+# --------- FUNCTIONS ---------
 
 log()  { printf '\033[1;36m[LAUNCH]\033[0m %s\n' "$1"; }
-warn() { printf '\033[1;33m[AVISO]\033[0m %s\n' "$1"; }
-err()  { printf '\033[1;31m[ERRO]\033[0m %s\n' "$1" >&2; }
+warn() { printf '\033[1;33m[WARNING]\033[0m %s\n' "$1"; }
+err()  { printf '\033[1;31m[ERROR]\033[0m %s\n' "$1" >&2; }
 
 check_requirements() {
     if [[ $EUID -eq 0 ]]; then
-        err "Não rode este script como root/sudo. Ele pede senha quando precisa."
+        err "Don't run this script as root/sudo. It asks for your password when needed."
         exit 1
     fi
 
     if ! command -v pacman &>/dev/null; then
-        err "pacman não encontrado. Este script é para Arch Linux (ou derivadas)."
+        err "pacman not found. This script is for Arch Linux (or derivatives)."
         exit 1
     fi
 
     if ! command -v yay &>/dev/null; then
-        err "yay não encontrado. Instale o yay antes de rodar este script:"
+        err "yay not found. Install yay before running this script:"
         err "  sudo pacman -S --needed base-devel"
         err "  git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si"
         exit 1
     fi
 
     if [[ ! -d "$CONFIG_SRC" ]]; then
-        err "Não encontrei a pasta .config em $DOTFILES_DIR"
-        err "Rode este script de dentro da pasta do repositório clonado."
+        err "Couldn't find the .config folder in $DOTFILES_DIR"
+        err "Run this script from inside the cloned repo folder."
         exit 1
     fi
 }
 
 install_packages() {
-    log "Garantindo que base-devel está instalado (necessário pra compilar pacotes do AUR)..."
+    log "Making sure base-devel is installed (needed to build AUR packages)..."
     sudo pacman -S --needed --noconfirm base-devel
 
-    log "Instalando pacotes dos repositórios oficiais..."
+    log "Installing official repo packages..."
     yay -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
 
-    log "Instalando pacotes do AUR..."
+    log "Installing AUR packages..."
     yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 
-    log "Aplicando cor das pastas do Papirus (branco)..."
-    papirus-folders -C white --theme Papirus-Dark || warn "Não consegui aplicar a cor das pastas automaticamente. Rode manualmente: papirus-folders -C white --theme Papirus-Dark"
+    log "Applying Papirus folder color (white)..."
+    papirus-folders -C white --theme Papirus-Dark || warn "Couldn't apply the folder color automatically. Run manually: papirus-folders -C white --theme Papirus-Dark"
 
-    log "Habilitando serviços de áudio (pipewire)..."
-    systemctl --user enable --now pipewire pipewire-pulse wireplumber || warn "Não consegui habilitar os serviços de áudio automaticamente. Rode manualmente: systemctl --user enable --now pipewire pipewire-pulse wireplumber"
+    log "Enabling audio services (pipewire)..."
+    systemctl --user enable --now pipewire pipewire-pulse wireplumber || warn "Couldn't enable audio services automatically. Run manually: systemctl --user enable --now pipewire pipewire-pulse wireplumber"
 }
 
 link_item() {
@@ -108,23 +108,23 @@ link_item() {
     local dest="$CONFIG_DEST/$name"
 
     if [[ ! -e "$src" ]]; then
-        warn "$name não existe no repo, pulando."
+        warn "$name doesn't exist in the repo, skipping."
         return
     fi
 
     if [[ -L "$dest" ]]; then
-        # já é um symlink — remove pra recriar apontando pro repo atual
-        log "Atualizando symlink existente: $name"
+        # already a symlink — remove it to recreate it pointing to the current repo
+        log "Updating existing symlink: $name"
         rm "$dest"
     elif [[ -e "$dest" ]]; then
-        # existe e não é symlink — faz backup
+        # exists and isn't a symlink — back it up
         local backup="${dest}.bak.$(date +%Y%m%d%H%M%S)"
-        warn "Config existente encontrada em $name, movendo para $(basename "$backup")"
+        warn "Existing config found for $name, moving it to $(basename "$backup")"
         mv "$dest" "$backup"
     fi
 
     ln -s "$src" "$dest"
-    log "Linkado: $name -> $dest"
+    log "Linked: $name -> $dest"
 }
 
 link_configs() {
@@ -140,7 +140,7 @@ link_configs() {
 }
 
 apply_gtk_theme() {
-    log "Aplicando tema GTK via gsettings (necessário pra apps GTK4/libadwaita, como o Nautilus)..."
+    log "Applying GTK theme via gsettings (needed for GTK4/libadwaita apps, like Nautilus)..."
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
     gsettings set org.gnome.desktop.interface font-name 'Rubik 11.6'
@@ -149,15 +149,15 @@ apply_gtk_theme() {
     gsettings set org.gnome.desktop.interface font-hinting 'slight'
     gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
     gsettings set org.gnome.desktop.interface font-rgba-order 'rgb' \
-        || warn "Não consegui aplicar o tema via gsettings automaticamente."
+        || warn "Couldn't apply the theme via gsettings automatically."
 }
 
 apply_cursor() {
     if command -v hyprctl &>/dev/null && pgrep -x Hyprland &>/dev/null; then
-        log "Aplicando tema de cursor..."
-        hyprctl setcursor macOS 24 || warn "Não consegui aplicar o cursor agora (rode manualmente depois: hyprctl setcursor macOS 24)"
+        log "Applying cursor theme..."
+        hyprctl setcursor macOS 24 || warn "Couldn't apply the cursor right now (run manually later: hyprctl setcursor macOS 24)"
     else
-        warn "Hyprland não está rodando agora. O cursor será aplicado no próximo login (já está no autostart.lua)."
+        warn "Hyprland isn't running right now. The cursor will be applied on next login (it's already in autostart.lua)."
     fi
 }
 
@@ -166,35 +166,35 @@ set_default_shell() {
     fish_path="$(command -v fish)"
 
     if [[ "$SHELL" == "$fish_path" ]]; then
-        log "fish já é o shell padrão."
+        log "fish is already the default shell."
         return
     fi
 
-    log "Definindo fish como shell padrão..."
+    log "Setting fish as the default shell..."
     if ! grep -qx "$fish_path" /etc/shells; then
         echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
     fi
     if ! chsh -s "$fish_path"; then
-        warn "chsh falhou, tentando via usermod..."
-        sudo usermod -s "$fish_path" "$(whoami)" || warn "Não consegui trocar o shell automaticamente. Rode manualmente: chsh -s $fish_path"
+        warn "chsh failed, trying via usermod..."
+        sudo usermod -s "$fish_path" "$(whoami)" || warn "Couldn't change the shell automatically. Run manually: chsh -s $fish_path"
     fi
 }
 
 main() {
-    log "Iniciando instalação do rice..."
+    log "Starting rice installation..."
     check_requirements
     install_packages
     link_configs
     apply_cursor
     apply_gtk_theme
     set_default_shell
-    log "Concluído! O sistema vai reiniciar pra aplicar tudo (shell, rice, etc)."
+    log "Done! The system will reboot to apply everything (shell, rice, etc)."
 
-    read -rp "Reiniciar agora? [S/n] " confirm
+    read -rp "Reboot now? [Y/n] " confirm
     if [[ "$confirm" =~ ^[Nn]$ ]]; then
-        warn "Reinício cancelado. Faça logout/login (ou reinicie manualmente) quando quiser."
+        warn "Reboot cancelled. Log out/in (or reboot manually) whenever you want."
     else
-        log "Reiniciando em 3 segundos..."
+        log "Rebooting in 3 seconds..."
         sleep 3
         sudo reboot
     fi
