@@ -112,11 +112,15 @@ Move focus with `SUPER + arrow keys`:
 | Move window   | `SUPER + Left Click` drag    |
 | Resize window | `SUPER + Right Click` drag   |
 
+---
+
 ## Notes
 
-- Wallpapers are located in "~/singularity/wallpapers/". Apply one with "awww img ~/singularity/wallpapers/FILENAME.png" (e.g. whispering-depths.png, hollow.png, forgotten-kingdom.png, ...).
+- Wallpapers are located in `~/singularity/wallpapers/`. Apply one with `awww img ~/singularity/wallpapers/FILENAME.png` (e.g. whispering-depths.png, hollow.png, forgotten-kingdom.png, ...).
   
-- This config was set up for an ABNT2 Thinkpad keyboard. Edit "~/.config/hypr/modules/input.lua" and adjust "kb_layout/kb_variant/kb_model" values to match your own layout.
+- This config was set up for an ABNT2 Thinkpad keyboard. Edit `~/.config/hypr/modules/input.lua` and adjust `kb_layout/kb_variant/kb_model` values to match your own layout.
+
+---
 
 ## Wallpapers
 
@@ -147,6 +151,8 @@ Move focus with `SUPER + arrow keys`:
 </tr>
 </table>
 
+---
+
 ## Details
 
 - OS: **[Arch Linux](https://archlinux.org)**
@@ -162,9 +168,37 @@ Move focus with `SUPER + arrow keys`:
 - Icons: **Papirus-Dark**
 - Cursor: **[apple_cursor](https://aur.archlinux.org/packages/apple_cursor)** (macOS-style)
 
+---
+
 ## Screenshots
 
 ![](screenshots/terminals.png)
 ![](screenshots/rofi.png)
 ![](screenshots/swaync.png)
 ![](screenshots/nvim.png)
+
+---
+
+## Extras
+
+### Uninstallation
+
+
+To remove the rice and restore your previous configs, run the uninstaller from
+inside the cloned repo:
+
+```bash
+chmod +x UNINSTALL.sh
+./UNINSTALL.sh
+```
+
+This removes the symlinks from `~/.config`, restores any backups the
+installer made, reverts the GTK theme/gsettings to their defaults, and sets
+your default shell back to bash.
+
+By default, packages installed by `LAUNCH.sh` are left untouched. To remove
+those as well, run:
+
+```bash
+./UNINSTALL.sh --purge
+```
