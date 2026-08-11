@@ -32,6 +32,7 @@ CONFIG_FOLDERS=(
     fish
     gtk-3.0
     gtk-4.0
+    nvim
 )
 
 # Arquivos soltos do .config (não pastas) que serão linkados
