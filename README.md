@@ -22,7 +22,7 @@ sudo pacman -S git
 2. Clone the repository:
 ```bash
 cd $HOME
-git clone https://github.com/zaikkoo/singularity
+git clone --depth 1 https://github.com/zaikkoo/singularity
 cd singularity
 ```
 
