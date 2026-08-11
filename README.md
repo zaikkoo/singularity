@@ -120,6 +120,8 @@ Move focus with `SUPER + arrow keys`:
   
 - This config was set up for an ABNT2 Thinkpad keyboard. Edit `~/.config/hypr/modules/input.lua` and adjust `kb_layout/kb_variant/kb_model` values to match your own layout.
 
+- All keybinds are defined in `~/.config/hypr/modules/binds.lua`. If a bind isn't working on your system, conflicts with another app, or you'd simply like to change it, edit that file directly and reload Hyprland (with `hyprctl reload`).
+
 ---
 
 ## Wallpapers
