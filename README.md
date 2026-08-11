@@ -122,14 +122,14 @@ Move focus with `SUPER + arrow keys`:
 
 <table>
   <tr>
-    <td><img src="wallpapers/void.png" width="350"></td>
-    <td><img src="wallpapers/void-1.png" width="350"></td>
-    <td><img src="wallpapers/void-2.png" width="350"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-preview.png" width="300"><br><sub>void.png</sub></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-1-preview.png" width="300"><br><sub>void-1.png</sub></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-2-preview.png" width="300"><br><sub>void-2.png</sub></td>
   </tr>
   <tr>
-    <td><img src="wallpapers/void-3.png" width="350"></td>
-    <td><img src="wallpapers/void-4.png" width="350"></td>
-    <td><img src="wallpapers/void-5.png" width="350"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-3-preview.png" width="300"><br><sub>void-3.png</sub></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-4-preview.png" width="300"><br><sub>void-4.png</sub></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-5-preview.png" width="300"><br><sub>void-5.png</sub></td>
   </tr>
 </table>
 
