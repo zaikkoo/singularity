@@ -120,19 +120,33 @@ Move focus with `SUPER + arrow keys`:
 
 ## Wallpapers
 
+## Wallpapers
+
 <table>
-  <tr>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-preview.png" width="400"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-1-preview.png" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-2-preview.png" width="400"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-3-preview.png" width="400"></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-4-preview.png" width="400"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-5-preview.png" width="400"></td>
-  </tr>
+<tr>
+<td align="center"><b>Whispering Depths</b></td>
+<td align="center"><b>Hollow</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/wallpapers-preview/whispering-depths-preview.png"></td>
+<td><img src="screenshots/wallpapers-preview/hollow-preview.png"></td>
+</tr>
+<tr>
+<td align="center"><b>Forgotten Kingdom</b></td>
+<td align="center"><b>Silent Descent</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/wallpapers-preview/forgotten-kingdom-preview.png"></td>
+<td><img src="screenshots/wallpapers-preview/silent-descent-preview.png"></td>
+</tr>
+<tr>
+<td align="center"><b>Pale Cathedral</b></td>
+<td align="center"><b>Fourth Chorus</b></td>
+</tr>
+<tr>
+<td><img src="screenshots/wallpapers-preview/pale-cathedral-preview.png"></td>
+<td><img src="screenshots/wallpapers-preview/fourth-chorus-preview.png"></td>
+</tr>
 </table>
 
 ## Details
