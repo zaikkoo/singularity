@@ -122,14 +122,16 @@ Move focus with `SUPER + arrow keys`:
 
 <table>
   <tr>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-preview.png" width="300"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-1-preview.png" width="300"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-2-preview.png" width="300"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-preview.png" width="400"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-1-preview.png" width="400"></td>
   </tr>
   <tr>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-3-preview.png" width="300"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-4-preview.png" width="300"></td>
-    <td align="center"><img src="screenshots/wallpapers-preview/void-5-preview.png" width="300"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-2-preview.png" width="400"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-3-preview.png" width="400"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-4-preview.png" width="400"></td>
+    <td align="center"><img src="screenshots/wallpapers-preview/void-5-preview.png" width="400"></td>
   </tr>
 </table>
 
