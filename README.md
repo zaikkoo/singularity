@@ -120,8 +120,6 @@ Move focus with `SUPER + arrow keys`:
 
 ## Wallpapers
 
-## Wallpapers
-
 <table>
 <tr>
 <td align="center"><b>Whispering Depths</b></td>
