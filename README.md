@@ -167,3 +167,4 @@ Move focus with `SUPER + arrow keys`:
 ![](screenshots/terminals.png)
 ![](screenshots/rofi.png)
 ![](screenshots/swaync.png)
+![](screenshots/nvim.png)
