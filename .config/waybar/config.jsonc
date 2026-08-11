@@ -93,12 +93,11 @@
 		}
 	},
 	"network": {
-	"interface": "wlp0s20f3",
 	"format-wifi": "",
 	"format-ethernet": "",
 	"format-disconnected": "󱚼",
 	"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-	"tooltip-format-ethernet": "{ifname} ",
+	"tooltip-format-ethernet": "Connected via Ethernet ",
 	"tooltip-format-disconnected": "Disconnected",
 	"max-length": 50
 	}
