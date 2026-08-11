@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 #
-# UNINSTALL.sh — desinstalador do rice Hyprland (zaikkoo/singularity)
+# UNINSTALL.sh — Hyprland rice uninstaller (zaikkoo/singularity)
 #
-# O que este script faz:
-#   1. Remove os symlinks criados pelo LAUNCH.sh em ~/.config
-#   2. Restaura o backup mais recente de cada config (se existir)
-#   3. Reverte o tema GTK/gsettings pros valores padrão
-#   4. Restaura o shell padrão para bash
-#   5. (opcional, com --purge) remove também os pacotes instalados pelo LAUNCH.sh
+# What this script does:
+#   1. Removes the symlinks created by LAUNCH.sh in ~/.config
+#   2. Restores the most recent backup of each config (if it exists)
+#   3. Reverts the GTK/gsettings theme to the default values
+#   4. Restores the default shell to bash
+#   5. (optional, with --purge) also removes the packages installed by LAUNCH.sh
 #
-# Uso:
-#   ./UNINSTALL.sh            # só remove configs/symlinks
-#   ./UNINSTALL.sh --purge    # remove configs/symlinks E os pacotes pacman/AUR
+# Usage:
+#   ./UNINSTALL.sh            # only removes configs/symlinks
+#   ./UNINSTALL.sh --purge    # removes configs/symlinks AND the pacman/AUR packages
 
 set -euo pipefail
 
-# --------- CONFIGURAÇÃO ---------
+# --------- CONFIGURATION ---------
 
 PURGE=false
 for arg in "$@"; do
@@ -24,12 +24,12 @@ for arg in "$@"; do
     esac
 done
 
-# Diretório onde este script está (assume que é a raiz do repo clonado)
+# Directory this script lives in (assumes it's the root of the cloned repo)
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_SRC="$DOTFILES_DIR/.config"
 CONFIG_DEST="$HOME/.config"
 
-# Precisa ser EXATAMENTE igual às listas do LAUNCH.sh
+# Must match the LAUNCH.sh lists EXACTLY
 CONFIG_FOLDERS=(
     hypr
     waybar
@@ -47,7 +47,7 @@ CONFIG_FILES=(
     starship.toml
 )
 
-# Precisa ser EXATAMENTE igual às listas do LAUNCH.sh (usadas só com --purge)
+# Must match the LAUNCH.sh lists EXACTLY (only used with --purge)
 PACMAN_PACKAGES=(
     hyprland kitty rofi-wayland swaync fastfetch fish starship nautilus
     nwg-look neovim awww qt6ct papirus-icon-theme wl-clipboard
@@ -57,24 +57,24 @@ PACMAN_PACKAGES=(
 
 AUR_PACKAGES=(
     apple_cursor papirus-folders ttf-jetbrains-mono-nerd ttf-rubik-vf
-    libcava waybar-cava-git
+    libcava waybar-cava-git ttf-iosevka-nerd
 )
 
-# --------- FUNÇÕES ---------
+# --------- FUNCTIONS ---------
 
 log()  { printf '\033[1;36m[UNINSTALL]\033[0m %s\n' "$1"; }
-warn() { printf '\033[1;33m[AVISO]\033[0m %s\n' "$1"; }
-err()  { printf '\033[1;31m[ERRO]\033[0m %s\n' "$1" >&2; }
+warn() { printf '\033[1;33m[WARNING]\033[0m %s\n' "$1"; }
+err()  { printf '\033[1;31m[ERROR]\033[0m %s\n' "$1" >&2; }
 
 check_requirements() {
     if [[ $EUID -eq 0 ]]; then
-        err "Não rode este script como root/sudo. Ele pede senha quando precisa."
+        err "Don't run this script as root/sudo. It asks for your password when needed."
         exit 1
     fi
 }
 
-# Acha o backup mais recente de um item (ex: hypr.bak.20260811143012)
-# Retorna vazio se não encontrar nenhum.
+# Finds the most recent backup of an item (e.g. hypr.bak.20260811143012)
+# Returns empty if none is found.
 find_latest_backup() {
     local name="$1"
     find "$CONFIG_DEST" -maxdepth 1 -name "${name}.bak.*" 2>/dev/null | sort -r | head -n1
@@ -85,35 +85,35 @@ unlink_item() {
     local src="$CONFIG_SRC/$name"
     local dest="$CONFIG_DEST/$name"
 
-    # Só remove se for symlink apontando pro repo (não mexe em configs que não são nossas)
+    # Only remove it if it's a symlink pointing to the repo (don't touch configs that aren't ours)
     if [[ -L "$dest" ]]; then
         local target
         target="$(readlink -f "$dest" 2>/dev/null || true)"
         if [[ "$target" == "$(cd "$src" 2>/dev/null && pwd || echo "$src")" ]]; then
             rm "$dest"
-            log "Symlink removido: $name"
+            log "Symlink removed: $name"
         else
-            warn "$name é um symlink, mas não aponta pro repo. Pulando (não mexo nisso)."
+            warn "$name is a symlink, but it doesn't point to the repo. Skipping (leaving it alone)."
             return
         fi
     elif [[ -e "$dest" ]]; then
-        warn "$name existe mas não é symlink (talvez já tenha sido restaurado antes). Pulando."
+        warn "$name exists but isn't a symlink (maybe it was already restored). Skipping."
         return
     else
-        log "$name já não existe em $CONFIG_DEST, nada a remover."
+        log "$name no longer exists in $CONFIG_DEST, nothing to remove."
     fi
 
     local backup
     backup="$(find_latest_backup "$name")"
     if [[ -n "$backup" ]]; then
         if [[ -e "$dest" ]]; then
-            warn "Já existe algo em $dest; não vou sobrescrever o backup $backup."
+            warn "Something already exists at $dest; won't overwrite it with backup $backup."
         else
             mv "$backup" "$dest"
-            log "Backup restaurado: $(basename "$backup") -> $name"
+            log "Backup restored: $(basename "$backup") -> $name"
         fi
     else
-        log "Nenhum backup encontrado pra $name."
+        log "No backup found for $name."
     fi
 }
 
@@ -128,7 +128,7 @@ unlink_configs() {
 }
 
 reset_gtk_theme() {
-    log "Revertendo tema GTK/gsettings pros padrões..."
+    log "Reverting GTK/gsettings theme to the defaults..."
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' || true
     gsettings set org.gnome.desktop.interface icon-theme 'Adwaita' || true
     gsettings set org.gnome.desktop.interface font-name 'Cantarell 11' || true
@@ -137,14 +137,14 @@ reset_gtk_theme() {
     gsettings set org.gnome.desktop.interface font-hinting 'slight' || true
     gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale' || true
     gsettings reset org.gnome.desktop.interface font-rgba-order \
-        || warn "Não consegui resetar font-rgba-order automaticamente."
+        || warn "Couldn't reset font-rgba-order automatically."
 }
 
 purge_packages() {
-    log "Removendo pacotes instalados pelo LAUNCH.sh (--purge ativado)..."
-    warn "Isso pode remover pacotes que você também usa por outros motivos. Confira antes se necessário."
+    log "Removing packages installed by LAUNCH.sh (--purge enabled)..."
+    warn "This may remove packages you also use for other reasons. Double-check first if needed."
     yay -Rns --noconfirm "${AUR_PACKAGES[@]}" "${PACMAN_PACKAGES[@]}" \
-        || warn "Alguns pacotes não puderam ser removidos (podem ser dependência de outra coisa, ou já não estarem instalados)."
+        || warn "Some packages couldn't be removed (they might be a dependency of something else, or already not installed)."
 }
 
 restore_default_shell() {
@@ -152,19 +152,19 @@ restore_default_shell() {
     bash_path="$(command -v bash)"
 
     if [[ "$SHELL" == "$bash_path" ]]; then
-        log "bash já é o shell padrão."
+        log "bash is already the default shell."
         return
     fi
 
-    log "Restaurando bash como shell padrão..."
+    log "Restoring bash as the default shell..."
     if ! chsh -s "$bash_path"; then
-        warn "chsh falhou, tentando via usermod..."
-        sudo usermod -s "$bash_path" "$(whoami)" || warn "Não consegui trocar o shell automaticamente. Rode manualmente: chsh -s $bash_path"
+        warn "chsh failed, trying via usermod..."
+        sudo usermod -s "$bash_path" "$(whoami)" || warn "Couldn't change the shell automatically. Run manually: chsh -s $bash_path"
     fi
 }
 
 main() {
-    log "Iniciando desinstalação do rice..."
+    log "Starting rice uninstallation..."
     check_requirements
     unlink_configs
     reset_gtk_theme
@@ -172,18 +172,18 @@ main() {
 
     if [[ "$PURGE" == true ]]; then
         purge_packages
-        log "Concluído! Symlinks removidos, backups restaurados e pacotes desinstalados."
+        log "Done! Symlinks removed, backups restored, and packages uninstalled."
     else
-        log "Concluído! Os symlinks foram removidos e os backups (se havia) foram restaurados."
-        warn "Os pacotes instalados via pacman/yay (hyprland, waybar-cava-git, etc.) NÃO foram removidos."
-        warn "Rode com --purge pra removê-los também, ou manualmente: yay -Rns <pacote>"
+        log "Done! The symlinks were removed and backups (if any) were restored."
+        warn "Packages installed via pacman/yay (hyprland, waybar-cava-git, etc.) were NOT removed."
+        warn "Run with --purge to remove them too, or manually: yay -Rns <package>"
     fi
 
-    read -rp "Reiniciar agora pra aplicar tudo? [S/n] " confirm
+    read -rp "Reboot now to apply everything? [Y/n] " confirm
     if [[ "$confirm" =~ ^[Nn]$ ]]; then
-        warn "Reinício cancelado. Faça logout/login (ou reinicie manualmente) quando quiser."
+        warn "Reboot cancelled. Log out/in (or reboot manually) whenever you want."
     else
-        log "Reiniciando em 3 segundos..."
+        log "Rebooting in 3 seconds..."
         sleep 3
         sudo reboot
     fi
