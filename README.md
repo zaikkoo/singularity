@@ -112,7 +112,7 @@ Move focus with `SUPER + arrow keys`:
 
 ## Notes
 
-- Wallpapers are located in `~/singularity/wallpapers/`. Apply one with `awww img ~/singularity/wallpapers/FILENAME.png` (e.g. whispering-depths.png, hollow.png, forgotten-kingdom.png, ...).
+- Wallpapers are located in `~/singularity/wallpapers/`. Apply one with `awww img ~/singularity/wallpapers/FILENAME.png` (e.g. whispering-depths.png, void.png, forgotten-kingdom.png, ...).
   
 - This config was set up for an ABNT2 Thinkpad keyboard. Edit `~/.config/hypr/modules/input.lua` and adjust `kb_layout/kb_variant/kb_model` values to match your own layout.
 
@@ -129,11 +129,11 @@ For additional details or troubleshooting, visit the [issues page](https://githu
 <table>
 <tr>
 <td align="center"><b>Whispering Depths</b></td>
-<td align="center"><b>Hollow</b></td>
+<td align="center"><b>Void</b></td>
 </tr>
 <tr>
 <td><img src="screenshots/wallpapers-preview/whispering-depths-preview.png"></td>
-<td><img src="screenshots/wallpapers-preview/hollow-preview.png"></td>
+<td><img src="screenshots/wallpapers-preview/void-preview.png"></td>
 </tr>
 <tr>
 <td align="center"><b>Forgotten Kingdom</b></td>
