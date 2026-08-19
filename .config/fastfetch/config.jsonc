@@ -3,8 +3,8 @@
     "logo": {
         "source": "~/.config/fastfetch/logos/kingbrand.txt",
         "padding": {
-            "left": 2,
-            "right": 6
+            "left": 6,
+            "right": 10
         }
     },
     "display": {
@@ -58,7 +58,8 @@
         {
             "type": "media",
             "key": "󰝚 ",
-            "keyColor": "33"
+            "keyColor": "33",
+	    "format": "{title} | {artist}"
         },
         "break",
         "break",
